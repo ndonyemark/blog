@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>User Details</h1>
+            <h3>{{user.username | capitalize}}</h3>
+        </div>
+        <div class="col-md-6">
+            <h1>My Blog Posts</h1>
+            <a href="/blogpost" class="btn btn-success">BlogPost</a>
+            {% for blogpost in user_blog_posts %}
+            <div>
+                <h3>{{blogpost.title}}</h3>
+                <p>{{blogpost.blog_post}}</p>
+                <p><span>Author: {{blogpost.users.username}}</span><span
+                        class="text-right">{{blogpost.date_posted}}</span></p>
+                <a href="{{url_for('main.update', blog_id=blogpost.id)}}" class="btn btn-success">update</a>
+                <a href="{{url_for('main.delete', blog_id=blogpost.id)}}" class="btn btn-danger">delete</a>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+<!-- {% if user == current_user %}
+                        <form action="{{url_for('main.update_pic', uname=user.username)}}" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="photo" class="form-control" required>
+                        <input type="submit">
+                    </form>
+                    {% endif %} -->
